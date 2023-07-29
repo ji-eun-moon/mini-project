@@ -1,15 +1,19 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function BlogForm() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const navigate = useNavigate();
 
   const onSubmit = () => {
       axios.post('http://localhost:3001/posts', {
       title: title,
       body: body
+      }).then(() => {
+        navigate('/blogs')
       })
   }
   return (

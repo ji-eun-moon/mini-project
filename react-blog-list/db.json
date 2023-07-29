@@ -1,18 +1,18 @@
 {
   "posts": [
     {
-      "title": "hello",
-      "body": "hello world!",
+      "title": "test1",
+      "body": "test1",
       "id": 1
     },
     {
-      "title": "hello2",
-      "body": "좋은 아침입니다~",
+      "title": "test2",
+      "body": "test2",
       "id": 2
     },
     {
-      "title": "hello3",
-      "body": "hihi",
+      "title": "test3",
+      "body": "test3",
       "id": 3
     }
   ]

@@ -9,17 +9,19 @@ function NavBar() {
           <Link className="navbar-brand" to="/">Home</Link>
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink
+              <NavLink
                   className={({ isActive }) => "nav-link" + (isActive ? " activated" : "")}
                   aria-current="page"
                   to="/blogs">
                   Blogs</NavLink>
+              </li>
+              {/* <li className="nav-item">
                 <NavLink
                   className={({ isActive }) => "nav-link" + (isActive ? " activated" : "")}
                   aria-current="page"
                   to="/blogs/create">
                   Create</NavLink>
-              </li>
+              </li> */}
             </ul>
         </div>
       </nav>
