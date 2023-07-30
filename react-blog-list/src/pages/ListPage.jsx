@@ -57,7 +57,7 @@ function ListPage() {
         <Card 
           key={post.id} 
           title={post.title} 
-          onClick={() => navigate("/blogs/edit")}>
+          onClick={() => navigate(`/blogs/${post.id}`)}>
           <button 
             className="btn btn-danger btn-sm" 
             onClick={(event) => deleteBlog(event, post.id)}>

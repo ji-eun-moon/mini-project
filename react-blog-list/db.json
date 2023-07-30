@@ -1,19 +1,16 @@
 {
   "posts": [
     {
-      "title": "test1",
-      "body": "test1",
-      "id": 1
+      "title": "createdAt test",
+      "body": "createdAt test",
+      "createdAt": 1690722896066,
+      "id": 4
     },
     {
       "title": "test2",
       "body": "test2",
-      "id": 2
-    },
-    {
-      "title": "test3",
-      "body": "test3",
-      "id": 3
+      "createdAt": 1690723194841,
+      "id": 5
     }
   ]
 }
