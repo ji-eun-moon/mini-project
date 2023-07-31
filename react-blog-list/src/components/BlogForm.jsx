@@ -1,8 +1,12 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { bool } from 'prop-types';
+
+// Edit Page
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 function BlogForm({editing}) {
   const [title, setTitle] = useState('');
@@ -14,7 +18,7 @@ function BlogForm({editing}) {
   useEffect(() => {
     axios.get(`http://localhost:3001/posts/${id}`)
     .then((response) => {
-      console.log(response.data)
+      // console.log(response.data)
       setTitle(response.data.title)
       setBody(response.data.body)
     })
