@@ -1,8 +1,12 @@
 import React from 'react'
+import BlogForm from '../components/BlogForm'
+
 
 function EditPage() {
   return (
-    <div>EditPage</div>
+    <div>
+      <BlogForm editing={true}/>
+    </div>
   )
 }
 

@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import LoadingSpinner from '../components/LoadingSpinner'
 
+import { Link } from 'react-router-dom'
+
 function DetailPage() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
@@ -29,7 +31,16 @@ function DetailPage() {
   }
   return (
     <div>
-        <h1>{post.title}</h1>
+      <div className='d-flex'>
+        <h1 className='flex-grow-1'>{post.title}</h1>
+        <div>
+          <Link 
+            className='btn btn-primary'
+            to={`/blogs/${id}/edit`}>
+            Edit
+          </Link>
+        </div>
+      </div>
         <small class="text-muted">작성 시간 : {printDate(post.createdAt)}</small>
         <br />
         <p>{post.body}</p>

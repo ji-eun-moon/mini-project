@@ -1,12 +1,24 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { bool } from 'prop-types';
 
-function BlogForm() {
+function BlogForm({editing}) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const navigate = useNavigate();
+
+  // Edit Page
+  const {id} = useParams();
+  useEffect(() => {
+    axios.get(`http://localhost:3001/posts/${id}`)
+    .then((response) => {
+      console.log(response.data)
+      setTitle(response.data.title)
+      setBody(response.data.body)
+    })
+  }, [])
 
   const onSubmit = () => {
       axios.post('http://localhost:3001/posts', {
@@ -19,7 +31,7 @@ function BlogForm() {
   }
   return (
     <div>
-        <h1>Create a blog post</h1>
+        <h1>{editing ? 'Edit' : 'Create'} a blog post</h1>
         <div className='mb-3'>
             <label className='form-label'>Title</label>
             <input 
@@ -44,9 +56,17 @@ function BlogForm() {
         <button 
             className='btn btn-primary'
             onClick={onSubmit}
-            >Post</button>
+            >{editing ? 'Edit' : 'Post'}</button>
     </div>
   )
+}
+
+BlogForm.propTypes = {
+  editing: bool
+}
+
+BlogForm.defaultProps = {
+  editing: false
 }
 
 export default BlogForm
