@@ -1,16 +1,24 @@
 {
   "posts": [
     {
-      "title": "Edit Test",
-      "body": "Edit Test",
+      "title": "Edit Test1",
+      "body": "Edit Test1",
       "createdAt": 1690722896066,
-      "id": 4
+      "id": 4,
+      "publish": false
     },
     {
       "title": "test2",
       "body": "test2",
       "createdAt": 1690723194841,
       "id": 5
+    },
+    {
+      "title": "publish test",
+      "body": "publish test",
+      "publish": true,
+      "createdAt": 1690903635545,
+      "id": 6
     }
   ]
 }
