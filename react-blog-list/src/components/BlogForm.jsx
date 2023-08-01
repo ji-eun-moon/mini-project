@@ -25,13 +25,22 @@ function BlogForm({editing}) {
   }, [])
 
   const onSubmit = () => {
-      axios.post('http://localhost:3001/posts', {
-      title: title,
-      body: body,
-      createdAt: Date.now()
-      }).then(() => {
-        navigate('/blogs')
-      })
+      if (editing) {
+        axios.patch(`http://localhost:3001/posts/${id}`, {
+          title: title,
+          body: body
+        }) .then(() => {
+          navigate('/blogs')
+        })
+      } else {
+        axios.post('http://localhost:3001/posts', {
+        title: title,
+        body: body,
+        createdAt: Date.now()
+        }).then(() => {
+          navigate('/blogs')
+        })
+      }
   }
   return (
     <div>
@@ -54,7 +63,7 @@ function BlogForm({editing}) {
             onChange={(event) => {
                 setBody(event.target.value)
             }}
-            rows={20}
+            rows={10}
             />
         </div>
         <button 

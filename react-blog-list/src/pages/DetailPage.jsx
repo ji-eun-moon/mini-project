@@ -20,7 +20,7 @@ function DetailPage() {
 
   useEffect(() => {
     getPost(id)
-  }, [])
+  }, [id])  // id가 변경될 때마다 함수 실행
 
   const printDate = (timestamp) => {
     return new Date(timestamp).toLocaleString();
@@ -41,7 +41,7 @@ function DetailPage() {
           </Link>
         </div>
       </div>
-        <small class="text-muted">작성 시간 : {printDate(post.createdAt)}</small>
+        <small className="text-muted">작성 시간 : {printDate(post.createdAt)}</small>
         <br />
         <p>{post.body}</p>
     </div>

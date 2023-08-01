@@ -1,8 +1,8 @@
 {
   "posts": [
     {
-      "title": "createdAt test",
-      "body": "createdAt test",
+      "title": "Edit Test",
+      "body": "Edit Test",
       "createdAt": 1690722896066,
       "id": 4
     },
