@@ -3,6 +3,7 @@ import CreatePage from './pages/CreatePage';
 import EditPage from './pages/EditPage';
 import ListPage from './pages/ListPage';
 import DetailPage from './pages/DetailPage';
+import AdminPage from './pages/AdminPage';
 
 
 const routes = [
@@ -13,6 +14,10 @@ const routes = [
   {
     path:'/blogs',
     element: <ListPage />
+  },
+  {
+    path:'/admin',
+    element: <AdminPage />
   },
   {
     path:'/blogs/create',

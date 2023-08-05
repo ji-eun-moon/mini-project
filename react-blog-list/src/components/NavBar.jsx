@@ -7,21 +7,21 @@ function NavBar() {
     <nav className="navbar navbar-dark bg-dark">
         <div className="container">
           <Link className="navbar-brand" to="/">Home</Link>
-            <ul className="navbar-nav">
-              <li className="nav-item">
+            <ul className="navbar-nav flex-row">
+              <li className="nav-item me-2">
               <NavLink
                   className={({ isActive }) => "nav-link" + (isActive ? " activated" : "")}
                   aria-current="page"
                   to="/blogs">
                   Blogs</NavLink>
               </li>
-              {/* <li className="nav-item">
+              <li className="nav-item">
                 <NavLink
                   className={({ isActive }) => "nav-link" + (isActive ? " activated" : "")}
                   aria-current="page"
-                  to="/blogs/create">
-                  Create</NavLink>
-              </li> */}
+                  to="/admin">
+                  Admin</NavLink>
+              </li>
             </ul>
         </div>
       </nav>
