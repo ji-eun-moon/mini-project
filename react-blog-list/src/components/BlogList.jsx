@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 
@@ -7,7 +7,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import Pagination from './Pagination.jsx';
 
 import { useNavigate, useLocation } from 'react-router-dom';
-import { bool } from 'prop-types';
+import propTypes from 'prop-types';
 
 function BlogList({isAdmin}) {
   const [posts, setPosts] = useState([]);
@@ -23,6 +23,8 @@ function BlogList({isAdmin}) {
   const [numberOfPosts, setNumberOfPosts] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
 
+  const [searchText, setSearchText] = useState('');
+
   const limit = 5;
   useEffect(() => {
     setNumberOfPages(Math.ceil(numberOfPosts / limit))
@@ -33,13 +35,14 @@ function BlogList({isAdmin}) {
     getPosts(page)
   }
 
-  const getPosts = (page = 1) => {
+  const getPosts = useCallback((page = 1) => {
 
     let params = {
       _page: page,
       _limit: 5,
       _sort: 'id',
       _order: 'desc',
+      title_like: searchText,  // 일부분만 일치해도 확인
     }
 
     if (!isAdmin) { 
@@ -57,12 +60,12 @@ function BlogList({isAdmin}) {
       // post 불러온 이후에 로딩중 상태 false로 변경
       setLoading(false);
     })
-  }
+  }, [isAdmin, searchText]);
 
   useEffect(() => {
     setCurrentPage(parseInt(pageParam) || 1)
     getPosts(parseInt(pageParam) || 1)
-  }, [pageParam])
+  }, [pageParam, getPosts])
 
   const deleteBlog = (event, id) => {
     // 이벤트 버블링 막기
@@ -108,18 +111,33 @@ function BlogList({isAdmin}) {
 
   return (
     <div>
+
+      <input 
+        type='text'
+        placeholder='Search...'
+        className='form-control'
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+        />
+      <hr />
+      {posts.length == 0 ?
+      <div>'No blog posts found'</div>
+      : 
+      <>
       {renderBlogList()}
 
       { numberOfPages > 1 && (<Pagination currentPage={currentPage} 
                   numberOfPages={numberOfPages} 
                   onClick={onClickPageButton} />)}
+      </>
+      }
     </div>
   )
     
 }
 
 BlogList.propTypes = {
-  isAdmin: bool
+  isAdmin: propTypes.bool
 }
 
 BlogList.defaultProps = {

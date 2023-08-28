@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { bool } from 'prop-types';
+import propTypes from 'prop-types';
 
 // Edit Page
 import { useEffect } from 'react';
@@ -19,6 +19,10 @@ function BlogForm({editing}) {
 
   // 공개 여부 결정
   const [publish, setPublish] = useState(false);
+
+  // Form validation
+  const [titleError, setTitleError] = useState(false);
+  const [bodyError, setBodyError] = useState(false);
 
   // Edit Page
   const {id} = useParams();
@@ -41,7 +45,24 @@ function BlogForm({editing}) {
     return title !== originalTitle || body !== originalBody || publish !== originalPublish
   }
 
+  const validateForm = () => {
+    let validated = true
+    if (title === '') {
+      setTitleError(true)
+      validated = false
+    }
+
+    if (body === '') {
+      setBodyError(true)
+      validated = false
+    }
+    return validated
+  }
+
   const onSubmit = () => {
+    setTitleError(false)
+    setBodyError(false)
+    if (validateForm()) {
       if (editing) {
         axios.patch(`http://localhost:3001/posts/${id}`, {
           title: title,
@@ -60,6 +81,7 @@ function BlogForm({editing}) {
           navigate('/admin')
         })
       }
+   }
   }
 
   const goBack = () => {
@@ -80,23 +102,29 @@ function BlogForm({editing}) {
         <div className='mb-3'>
             <label className='form-label'>Title</label>
             <input 
-            className='form-control'
+            className={`form-control ${titleError ? 'border-danger' : ""}`}
             value={title}
             onChange={(event) => {
                 setTitle(event.target.value)
             }}
             />
+          { titleError && <div className='text-danger'>
+              Title is required
+          </div> }
         </div>
         <div className='mb-3'>
             <label className='form-label'>Body</label>
             <textarea 
-            className='form-control'
+            className={`form-control ${bodyError ? 'border-danger' : ""}`}
             value={body}
             onChange={(event) => {
                 setBody(event.target.value)
             }}
             rows={10}
             />
+            { bodyError && <div className='text-danger'>
+              Body is required
+            </div>}
         </div>
 
         {/* 공개 여부 결정하기 */}
@@ -125,7 +153,7 @@ function BlogForm({editing}) {
 }
 
 BlogForm.propTypes = {
-  editing: bool
+  editing: propTypes.bool
 }
 
 BlogForm.defaultProps = {
